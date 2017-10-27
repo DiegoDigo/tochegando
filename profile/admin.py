@@ -8,13 +8,8 @@ class AdminParent(admin.ModelAdmin):
 
 
 class AdminChild(admin.ModelAdmin):
-    list_display = ['fullname', 'age', 'period', 'get_parent']
+    list_display = ['fullname', 'age', 'period']
     list_filter = ['period', 'age']
-
-    def get_parent(self, obj):
-        return obj.parent.fullname
-
-    get_parent.short_description = 'Responsaveu'
 
 
 admin.site.register(Parent, AdminParent)

@@ -40,7 +40,7 @@ NATIVE_APPS = [
 ]
 
 OTHERS_APP = [
-
+    'rest_framework',
 ]
 
 MY_APP = [
