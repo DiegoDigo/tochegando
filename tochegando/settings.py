@@ -24,7 +24,9 @@ SECRET_KEY = 'v67y-5b&sxnxn-99_fjbs61(a^6r9vr_dv4k^y25&h9ddtb*6y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # AUTH_USER_MODEL = 'costumer.User'
 
@@ -41,6 +43,8 @@ NATIVE_APPS = [
 
 OTHERS_APP = [
     'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 MY_APP = [
@@ -59,7 +63,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
+
 
 ROOT_URLCONF = 'tochegando.urls'
 
@@ -126,6 +140,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
 
 # dados email
 EMAIL_USE_TLS = True
