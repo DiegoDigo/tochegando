@@ -1,29 +1,28 @@
+import logging
+
+from unittest.mock import Mock, patch
+from django.db import DatabaseError
 from django.test import TestCase
-from model_mommy import mommy
-from .models import Parent, Child
-from datetime import datetime
-from django.contrib.auth.models import User
+from rest_framework.test import APIClient
+from .models import Parent
 
 
 class TestParents(TestCase):
+
+    cursor_wrapper = Mock()
+    cursor_wrapper.side_effect = DatabaseError
+
     def setUp(self):
-        self.user = mommy.make(User, username='diego.delmiro', password='@mesma1012')
-        self.parent = mommy.make(Parent, user=self.user, fullname='Diego Domingos Delmiro', prefixmobile='11',
-                                 mobile='958044062', prefixphone='11', phone='39831394', city='SP')
+        self.client = APIClient()
+        logging.disable(logging.CRITICAL)
 
-    def test_parent_creation(self):
-        self.assertTrue(isinstance(self.parent, Parent))
-        self.assertEquals(self.parent.__str__(), self.parent.fullname)
+    def teste_get_200(self):
+        response = self.client.get('/api/parents/')
+        self.assertEqual(200, response.status_code)
 
+    @patch.object(Parent.objects,'all')
+    def teste_get_200_return_without_data(self, all):
+        response = self.client.get('/api/parents/')
+        all.return_value = None
+        self.assertNotEqual(response.data, all())
 
-class TestChildren(TestCase):
-    def setUp(self):
-        self.user = mommy.make(User, username='diego.delmiro', password='@mesma1012')
-        self.parent = mommy.make(Parent, user=self.user, fullname='Diego Domingos Delmiro', prefixmobile='11',
-                                 mobile='958044062', prefixphone='11', phone='39831394', city='SP')
-        self.child = mommy.make(Child, parent=self.parent, fullname='Jose Willian Domingos Almeida',
-                                birthday=datetime.today().date(), age=25, period='manha')
-
-    def test_child_creation(self):
-        self.assertTrue(isinstance(self.child, Child))
-        self.assertEquals(self.child.__str__(), self.child.fullname)
