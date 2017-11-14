@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -45,6 +48,7 @@ OTHERS_APP = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'cloudinary',
 ]
 
 MY_APP = [
@@ -52,6 +56,14 @@ MY_APP = [
     'vehicle',
     'profile',
 ]
+
+
+cloudinary.config(
+    cloud_name="dzcvxohec",
+    api_key="523226973273465",
+    api_secret="ikvZJlMbXCaNzyxlLrhBjp_0yWQ"
+)
+
 
 INSTALLED_APPS = NATIVE_APPS + OTHERS_APP + MY_APP
 

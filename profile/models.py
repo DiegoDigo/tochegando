@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 cidades = (('SP', 'São Paulo'),
            ('RJ', 'Rio de Janeiro'),
@@ -16,6 +17,7 @@ class Child(models.Model):
     birthday = models.DateField(u'data nascimento')
     age = models.PositiveIntegerField(u'idade')
     period = models.CharField(choices=periodos, max_length=10)
+    image = CloudinaryField('imagem')
 
     def __str__(self):
         return self.fullname
@@ -34,6 +36,7 @@ class Parent(models.Model):
     phone = models.CharField(u'telefone', max_length=8, null=True, blank=True)
     city = models.CharField(u'cidade', choices=cidades, max_length=50)
     child = models.ManyToManyField(Child, related_name='filhos')
+    image = CloudinaryField('imagem')
 
     def __str__(self):
         return self.fullname

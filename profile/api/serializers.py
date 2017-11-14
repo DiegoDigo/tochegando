@@ -7,6 +7,12 @@ class SerializerChild(serializers.ModelSerializer):
         model = Child
         fields = '__all__'
 
+    def to_representation(self, instance):
+        representation = super(SerializerChild, self).to_representation(instance)
+        representation['imagem'] = instance.image.url
+        return representation
+
+
 
 class SerializerParents(serializers.ModelSerializer):
 
@@ -15,3 +21,8 @@ class SerializerParents(serializers.ModelSerializer):
     class Meta:
         model = Parent
         fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super(SerializerParents, self).to_representation(instance)
+        representation['imagem'] = instance.image.url
+        return representation
