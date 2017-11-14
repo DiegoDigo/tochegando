@@ -12,12 +12,26 @@ periodos = (('manha', 'Matutino'),
             ('tarde', 'Diurno'),)
 
 
+class School(models.Model):
+    nameschool = models.CharField(u'Nome Escola', max_length=100)
+    address = models.CharField(u'Endereço', max_length=100)
+    addressNumber = models.CharField(u'Numero', max_length=4)
+
+    def __str__(self):
+        return self.nameschool
+
+    class Meta:
+        verbose_name = u'escola'
+        verbose_name_plural = u'escolas'
+
+
 class Child(models.Model):
     fullname = models.CharField(u'nome', max_length=50)
     birthday = models.DateField(u'data nascimento')
     age = models.PositiveIntegerField(u'idade')
     period = models.CharField(choices=periodos, max_length=10)
-    image = CloudinaryField('imagem')
+    image = CloudinaryField(u'imagem')
+    school = models.ForeignKey(School)
 
     def __str__(self):
         return self.fullname

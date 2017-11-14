@@ -9,9 +9,8 @@ class SerializerChild(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super(SerializerChild, self).to_representation(instance)
-        representation['imagem'] = instance.image.url
+        representation['image'] = instance.image.url
         return representation
-
 
 
 class SerializerParents(serializers.ModelSerializer):
@@ -24,5 +23,5 @@ class SerializerParents(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super(SerializerParents, self).to_representation(instance)
-        representation['imagem'] = instance.image.url
+        representation['image'] = instance.image.url
         return representation
