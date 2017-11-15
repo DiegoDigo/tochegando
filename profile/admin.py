@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Parent, Child
+from .models import Parent, Child, School
 
 
 class AdminParent(admin.ModelAdmin):
@@ -12,5 +12,10 @@ class AdminChild(admin.ModelAdmin):
     list_filter = ['period', 'age']
 
 
+class AdminSchool(admin.ModelAdmin):
+    list_display = ['nameschool', 'address', 'addressNumber']
+
+
 admin.site.register(Parent, AdminParent)
 admin.site.register(Child, AdminChild)
+admin.site.register(School, AdminSchool)

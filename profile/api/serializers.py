@@ -1,8 +1,17 @@
 from rest_framework import serializers
-from ..models import Parent, Child
+from ..models import Parent, Child, School
+
+
+class SerializerSchool(serializers.ModelSerializer):
+    class Meta:
+        model = School
+        fields = '__all__'
 
 
 class SerializerChild(serializers.ModelSerializer):
+
+    school = SerializerSchool()
+
     class Meta:
         model = Child
         fields = '__all__'
