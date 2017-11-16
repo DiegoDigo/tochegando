@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
-from profile.models import School
+from profile.models import School, City
 
 typesVehicle = (('micro', 'Micro-Onibus'),
                 ('min', 'Mini-Van'),)
@@ -24,6 +24,7 @@ class Driver(models.Model):
     category = models.CharField(u'Categoria', max_length=3)
     vehicle = models.ManyToManyField(Vehicle, related_name='veiculos')
     school = models.ForeignKey(School)
+    cidade = models.ForeignKey(City)
 
     def __str__(self):
         return self.fullname
