@@ -24,7 +24,7 @@ class Driver(models.Model):
     category = models.CharField(u'Categoria', max_length=3)
     vehicle = models.ManyToManyField(Vehicle, related_name='veiculos')
     school = models.ForeignKey(School)
-    cidade = models.ForeignKey(City)
+    city = models.ForeignKey(City)
 
     def __str__(self):
         return self.fullname
