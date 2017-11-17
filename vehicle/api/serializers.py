@@ -8,6 +8,11 @@ class VehicleSerializer(ModelSerializer):
         model = Vehicle
         fields = "__all__"
 
+    def to_representation(self, instance):
+        representation = super(VehicleSerializer, self).to_representation(instance)
+        representation['image'] = instance.image.url
+        return representation
+
 
 class DriverSerializer(ModelSerializer):
 
