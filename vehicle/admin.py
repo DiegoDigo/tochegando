@@ -12,7 +12,7 @@ class AdminDriver(admin.ModelAdmin):
         return ", ".join([v.typevehicle for v in obj.vehicle.all()])
 
     def get_city(self, obj):
-        return obj.city.nameCity
+        return obj.city.state
 
     get_school.short_description = 'escola'
     get_vehicle.short_description = 'Veiculos'

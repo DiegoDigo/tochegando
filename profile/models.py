@@ -13,12 +13,11 @@ periodos = (('manha', 'Matutino'),
 
 
 class City(models.Model):
-    nameCity = models.CharField(u'cidade', max_length=100)
     state = models.CharField(u'Estado', max_length=100)
     uf = models.CharField(u'UF', max_length=2)
 
     def __str__(self):
-        return self.nameCity
+        return self.state
 
     class Meta:
         verbose_name = u'cidade'
