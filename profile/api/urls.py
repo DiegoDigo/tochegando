@@ -5,4 +5,5 @@ from . import views
 urlpatterns = [
     url(r'^parents/?$', views.Parents.as_view()),
     url(r'^children/?$', views.Children.as_view()),
+    url(r'^schools/?$', views.Schools.as_view(), name="school"),
 ]

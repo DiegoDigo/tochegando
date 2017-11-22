@@ -44,7 +44,7 @@ class Child(models.Model):
     birthday = models.DateField(u'data nascimento')
     age = models.PositiveIntegerField(u'idade')
     period = models.CharField(choices=periodos, max_length=10)
-    image = CloudinaryField(u'imagem', null=True)
+    image = CloudinaryField('image', blank=True, null=True)
     school = models.ForeignKey(School)
 
     def __str__(self):

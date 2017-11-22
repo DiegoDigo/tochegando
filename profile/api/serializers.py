@@ -44,3 +44,12 @@ class SerializerParents(serializers.ModelSerializer):
         representation = super(SerializerParents, self).to_representation(instance)
         representation['image'] = instance.image.url
         return representation
+
+
+class SerializerSchool(serializers.ModelSerializer):
+
+    city = SerializerCity()
+
+    class Meta:
+        model = School
+        fields = '__all__'
