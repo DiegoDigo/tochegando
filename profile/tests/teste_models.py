@@ -15,8 +15,10 @@ class TestModelSchools(TestCase):
                                  city=self.city)
         self.child = mommy.make(Child, fullname='Diego', birthday=datetime.today(), age=26,
                                 period='matutino', image=None, school=self.school)
-        self.parent = mommy.make(Parent, user=self.user, fullname='Maria Gilda', prefixmobile='11', mobile='958044062',
-                                 prefixphone=None, phone=None, city=self.city, child=[self.child], image=None)
+        self.parent = mommy.make(Parent, user=self.user, fullname='Maria Gilda', email='teste@gmail.com',
+                                 publicPlace="rua teste", numberPublicPlace='711', prefixmobile='11',
+                                 contactNumberMobiel='958044062', prefixNumber=None, contactNumber=None,
+                                 city=self.city, child=[self.child], image=None)
 
     def test_record_create_school(self):
         self.assertTrue(self.school, School)

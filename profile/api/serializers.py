@@ -38,8 +38,8 @@ class SerializerParents(serializers.ModelSerializer):
 
     class Meta:
         model = Parent
-        fields = ('fullname', 'prefixmobile', 'mobile', 'prefixphone', 'phone',
-                  'city', 'child', 'image')
+        fields = ('fullname', 'email', 'publicPlace', 'numberPublicPlace', 'prefixNumber', 'contactNumber',
+                  'prefixmobile', 'contactNumberMobiel', 'city', 'child', 'image', 'created', 'modified' )
 
 
 def to_representation(self, instance):
