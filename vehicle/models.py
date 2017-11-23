@@ -24,7 +24,7 @@ class Vehicle(models.Model):
         verbose_name_plural = 'Veiculos'
 
 
-class Driver(TimeStampedModel):
+class Driver(models.Model):
     fullname = models.CharField(u'nome', max_length=100)
     email = models.EmailField(verbose_name=u'E-mail')
     contactNumberDDD = models.CharField(verbose_name=u'DDD', max_length=5)
@@ -35,6 +35,7 @@ class Driver(TimeStampedModel):
     city = models.ForeignKey(City, verbose_name="Cidade")
     createdIn = models.DateField(auto_now=True, auto_now_add=False)
     image = CloudinaryField(u'imagem')
+    school = models.ForeignKey(School, verbose_name="Escola")
     objects = DriversQuerySet.as_manager()
 
     def __str__(self):

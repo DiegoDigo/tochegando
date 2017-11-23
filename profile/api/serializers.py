@@ -9,7 +9,6 @@ class SerializerCity(serializers.ModelSerializer):
 
 
 class SerializerSchool(serializers.ModelSerializer):
-
     city = SerializerCity()
 
     class Meta:
@@ -18,7 +17,6 @@ class SerializerSchool(serializers.ModelSerializer):
 
 
 class SerializerChild(serializers.ModelSerializer):
-
     school = SerializerSchool()
 
     class Meta:
@@ -32,24 +30,22 @@ class SerializerChild(serializers.ModelSerializer):
 
 
 class SerializerParents(serializers.ModelSerializer):
-
     child = SerializerChild(many=True)
     city = SerializerCity()
 
     class Meta:
         model = Parent
         fields = ('fullname', 'email', 'publicPlace', 'numberPublicPlace', 'prefixNumber', 'contactNumber',
-                  'prefixmobile', 'contactNumberMobiel', 'city', 'child', 'image', 'created', 'modified' )
+                  'prefixmobile', 'contactNumberMobiel', 'city', 'child', 'image', 'createdIn')
 
 
 def to_representation(self, instance):
-        representation = super(SerializerParents, self).to_representation(instance)
-        representation['image'] = "" if instance.image is None else instance.image.url
-        return representation
+    representation = super(SerializerParents, self).to_representation(instance)
+    representation['image'] = "" if instance.image is None else instance.image.url
+    return representation
 
 
 class SerializerSchool(serializers.ModelSerializer):
-
     city = SerializerCity()
 
     class Meta:

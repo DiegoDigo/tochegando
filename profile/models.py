@@ -37,7 +37,7 @@ class School(models.Model):
         verbose_name_plural = u'escolas'
 
 
-class Child(TimeStampedModel):
+class Child(models.Model):
     fullname = models.CharField(u'nome', max_length=50)
     birthday = models.DateField(u'data nascimento')
     age = models.PositiveIntegerField(u'idade', null=True, blank=True)
@@ -57,7 +57,7 @@ class Child(TimeStampedModel):
         verbose_name_plural = u'filhos'
 
 
-class Parent(TimeStampedModel):
+class Parent(models.Model):
     user = models.ForeignKey(User, default=User, related_name='Usuario')
     fullname = models.CharField(u'nome', max_length=50)
     email = models.EmailField(verbose_name=u'Email')
@@ -69,6 +69,7 @@ class Parent(TimeStampedModel):
     contactNumberMobiel = models.CharField(verbose_name=u'Numero Celular', max_length=9)
     child = models.ManyToManyField(Child, related_name='filhos', verbose_name="Filhos")
     image = CloudinaryField('image', blank=True, null=True)
+    createdIn = models.DateField(auto_now=True, auto_now_add=False)
     city = models.ForeignKey(City, verbose_name="Cidade")
 
     def __str__(self):

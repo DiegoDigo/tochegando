@@ -57,13 +57,11 @@ MY_APP = [
     'profile',
 ]
 
-
 cloudinary.config(
     cloud_name="dzcvxohec",
     api_key="523226973273465",
     api_secret="ikvZJlMbXCaNzyxlLrhBjp_0yWQ"
 )
-
 
 INSTALLED_APPS = NATIVE_APPS + OTHERS_APP + MY_APP
 
@@ -79,13 +77,11 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     )
 }
-
 
 ROOT_URLCONF = 'tochegando.urls'
 
@@ -161,3 +157,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'di3g0d0ming05@gmail.com'
 EMAIL_HOST_PASSWORD = '@mesma1040'
 EMAIL_PORT = 587
+
+DATE_FORMATS = ('%d-%m-%Y')

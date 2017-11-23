@@ -22,3 +22,9 @@ class Vehicles(generics.ListAPIView):
     def get_queryset(self):
         return Vehicle.objects.filter(id=self.kwargs['pk'])
 
+
+class DriversByID(generics.ListAPIView):
+    serializer_class = DriverSerializer
+
+    def get_queryset(self):
+        return Driver.objects.filter(id=self.kwargs['pk'])
