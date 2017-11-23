@@ -3,6 +3,8 @@ from django.db import models
 from profile.models import School, City
 from .querys import DriversQuerySet
 from cloudinary.models import CloudinaryField
+from model_utils.models import TimeStampedModel
+
 
 typesVehicle = (('micro', 'Micro-Onibus'),
                 ('min', 'Mini-Van'),)
@@ -22,7 +24,7 @@ class Vehicle(models.Model):
         verbose_name_plural = 'Veiculos'
 
 
-class Driver(models.Model):
+class Driver(TimeStampedModel):
     fullname = models.CharField(u'nome', max_length=100)
     category = models.CharField(u'Categoria', max_length=3)
     vehicle = models.ManyToManyField(Vehicle, related_name='veiculos')

@@ -27,7 +27,7 @@ class SerializerChild(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super(SerializerChild, self).to_representation(instance)
-        representation['image'] = instance.image.url
+        representation['image'] = "" if instance.image is None else instance.image.url
         return representation
 
 
@@ -38,11 +38,13 @@ class SerializerParents(serializers.ModelSerializer):
 
     class Meta:
         model = Parent
-        fields = '__all__'
+        fields = ('fullname', 'prefixmobile', 'mobile', 'prefixphone', 'phone',
+                  'city', 'child', 'image')
 
-    def to_representation(self, instance):
+
+def to_representation(self, instance):
         representation = super(SerializerParents, self).to_representation(instance)
-        representation['image'] = instance.image.url
+        representation['image'] = "" if instance.image is None else instance.image.url
         return representation
 
 
