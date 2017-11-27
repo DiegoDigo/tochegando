@@ -1,0 +1,517 @@
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib tagdir="/WEB-INF/tags/tenant" prefix="tenant" %>
+
+<tenant:input tenantField="profissional.cliente.id"/>
+
+<div class="form-group col-md-5 col-lg-5 col-sm-12">
+    <label for="profissional.nomeCompleto">Nome Completo</label>
+    <form:input path='profissional.nomeCompleto' type='text'
+        cssClass='form-control required' />
+    <form:errors path='profissional.nomeCompleto' cssClass='erroValidacao' />
+</div>
+
+<div class="form-group col-md-4 col-sm-12">
+        <label for="profissional.informacaoPessoalFinanceira.cpf">CPF</label>
+        <form:input path='profissional.informacaoPessoalFinanceira.cpf' type='text'
+            cssClass='form-control cpf' />
+        
+</div>
+
+<div class="form-group col-md-3 col-sm-12">
+        <label for="profissional.intervaloAgendamento">Interv. Agend.</label>
+        <form:input path='profissional.intervaloAgendamento' type='number' min="30" step="30"
+            cssClass='form-control required somenteNumerosComIntervaloDeMeiaHora' />
+        <form:errors path='profissional.intervaloAgendamento' cssClass='erroValidacao' />
+    
+</div>
+
+<div class="form-group col-md-4 col-sm-12">
+    <label for="profissional.cargo.id">Cargo</label>
+    <a onclick="chamaModal();" id="abrirModal"
+    data-toggle="modal"><span class="glyphicon glyphicon-plus-sign"></span></a>
+    <!-- <a href="/cargo/form"><span class="glyphicon glyphicon-plus-sign"></span></a> -->
+    <form:select path='profissional.cargo.id' items='${cargoList}' itemValue='id'
+        itemLabel='nome' cssClass='form-control required'>
+    </form:select>
+    <form:errors  path='profissional.cargo.id' cssClass='erroValidacao' />
+</div>
+
+<!-- <div class="form-group col-md-5 col-lg-5 col-sm-12"> -->
+<!--    <label for="photoForm.source">Foto</label> -->
+<%--    <form:input path='photoForm.source' type='file' --%>
+<%--        cssClass='form-control' />   --%>
+<!-- </div> -->
+
+<div class="form-group col-md-3 col-lg-3 col-sm-12">
+    <label for="profissional.apelido">Apelido</label>
+    <form:input path='profissional.apelido' type='text' cssClass='form-control' />
+    <form:errors path='profissional.apelido' cssClass='erroValidacao' />
+
+</div>
+
+<div class="form-group col-md-5 col-sm-12">
+    <label for="profissional.email">Email</label>
+    <form:input path='profissional.email' type='email' cssClass='form-control' />
+    <form:errors path='profissional.email' cssClass='erroValidacao' />
+
+</div>
+<div class="form-group col-md-4 col-sm-12">
+    <label for="profissional.informacaoContato.telefone">Telefone</label>
+    <form:input path='profissional.informacaoContato.telefone' type='text'
+        cssClass='form-control tel' />
+    <form:errors path='profissional.informacaoContato.telefone' cssClass='erroValidacao' />
+
+</div>
+<div class="form-group col-md-3 col-sm-12">
+    <label for="profissional.possuiAgenda">Possui Agenda</label>
+    
+    <div class="btn-group simnao" style="display: inline-block;">
+        <button id="sim" type="button" class="btn btn-default1 simnaobt">Sim</button>
+        <button id="nao" type="button" class="btn btn-default1 simnaobt">N?o</button>
+    </div>
+    
+    <form:hidden id="possuiAgenda" path='profissional.possuiAgenda' cssClass='form-control required' /> 
+    <form:errors path='profissional.possuiAgenda' cssClass='erroValidacao' />
+
+</div>
+<c:set var="erroNasJornadas"><form:errors path="jornadasForm"/></c:set>
+<div class="form-group col-md-12 col-sm-12">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="dadosAdicionais">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#adicionais" aria-expanded="false" aria-controls="adicionais">
+              Dados Adicionais
+            </a>
+          </h4>
+        </div>
+        <div id="adicionais" class="panel-collapse collapse" role="tabpanel" aria-labelledby="dadosAdicionais">
+          <div class="panel-body">
+            
+            <div class="form-group col-md-12 col-sm-12">
+        <label for="profissional.sobre">Observa??o</label>
+        <form:textarea path='profissional.sobre' type='text' cssClass='form-control' />
+        <form:errors path='profissional.sobre' cssClass='erroValidacao' />
+    
+    </div>
+    
+    
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="profissional.informacaoContato.celular">Celular</label>
+        <form:input path='profissional.informacaoContato.celular' type='text'
+            cssClass='form-control tel' />
+        <form:errors path='profissional.informacaoContato.celular' cssClass='erroValidacao' />
+    
+    </div>
+    <div class="form-group col-md-8 col-sm-12">
+        <label for="profissional.informacaoContato.site">Site</label>
+        <form:input path='profissional.informacaoContato.site' type='text'
+            cssClass='form-control' />
+        <form:errors path='profissional.informacaoContato.site' cssClass='erroValidacao' />
+    
+    </div>
+    
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="profissional.informacaoPessoalFinanceira.rg">RG</label>
+        <form:input path='profissional.informacaoPessoalFinanceira.rg' type='text'
+            cssClass='form-control rg' />
+        <form:errors path='profissional.informacaoPessoalFinanceira.rg'
+            cssClass='erroValidacao' />
+    
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="profissional.informacaoPessoalFinanceira.dataNascimento">Data de Nascimento</label>
+        <form:input path='profissional.informacaoPessoalFinanceira.dataNascimento'
+            type='text' cssClass='form-control data' />
+        <form:errors path='profissional.informacaoPessoalFinanceira.dataNascimento'
+            cssClass='erroValidacao' />
+    
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="profissional.informacaoEndereco.cep">CEP</label>
+        <form:input path='profissional.informacaoEndereco.cep' type='text'
+            cssClass='form-control cep' />
+        <form:errors path='profissional.informacaoEndereco.cep' cssClass='erroValidacao' />
+    
+    </div>
+    <div class="form-group col-md-12 col-sm-12">
+        <label for="profissional.informacaoEndereco.endereco">Endereco</label>
+        <form:input path='profissional.informacaoEndereco.endereco' type='text'
+            cssClass='form-control' />
+        <form:errors path='profissional.informacaoEndereco.endereco'
+            cssClass='erroValidacao' />
+    
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="profissional.informacaoEndereco.bairro">Bairro</label>
+        <form:input path='profissional.informacaoEndereco.bairro' type='text'
+            cssClass='form-control' />
+        <form:errors path='profissional.informacaoEndereco.bairro' cssClass='erroValidacao' />
+    
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="profissional.informacaoEndereco.cidade">Cidade</label>
+        <form:input path='profissional.informacaoEndereco.cidade' type='text'
+            cssClass='form-control' />
+        <form:errors path='profissional.informacaoEndereco.cidade' cssClass='erroValidacao' />
+    
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="profissional.informacaoEndereco.estado">Estado</label>
+        <form:select path='profissional.informacaoEndereco.estado' cssClass='form-control'>         
+            <form:option value="">--Selecione--</form:option>
+            <form:options items='${estadoList}' itemValue='value' itemLabel='nome'/>            
+        </form:select>
+        <form:errors path='profissional.informacaoEndereco.estado' cssClass='erroValidacao' />
+    
+    </div>
+    
+    
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="profissional.informacaoPessoalFinanceira.banco">Banco</label>
+        <form:input path='profissional.informacaoPessoalFinanceira.banco' type='text'
+            cssClass='form-control' />
+        <form:errors path='profissional.informacaoPessoalFinanceira.banco'
+            cssClass='erroValidacao' />
+    
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="profissional.informacaoPessoalFinanceira.agencia">Agencia</label>
+        <form:input path='profissional.informacaoPessoalFinanceira.agencia' type='text'
+            cssClass='form-control' />
+        <form:errors path='profissional.informacaoPessoalFinanceira.agencia'
+            cssClass='erroValidacao' />
+    
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="profissional.informacaoPessoalFinanceira.conta">Conta</label>
+        <form:input path='profissional.informacaoPessoalFinanceira.conta' type='text'
+            cssClass='form-control' />
+        <form:errors path='profissional.informacaoPessoalFinanceira.conta'
+            cssClass='erroValidacao' />
+    
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="profissional.informacaoContato.facebook">Facebook</label>
+        <form:input path='profissional.informacaoContato.facebook' type='text'
+            cssClass='form-control' />
+        <form:errors path='profissional.informacaoContato.facebook' cssClass='erroValidacao' />
+    
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+        <label for="profissional.informacaoContato.twitter">Twitter</label>
+        <form:input path='profissional.informacaoContato.twitter' type='text'
+            cssClass='form-control' />
+        <form:errors path='profissional.informacaoContato.twitter' cssClass='erroValidacao' />
+    
+    </div>
+    
+    
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+</div>
+
+<div class="form-group col-md-12 col-sm-12">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="jornadaTrabalho">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#trabalho" aria-expanded="false" aria-controls="trabalho">
+              Jornada de Trabalho
+            </a>
+          </h4>
+        </div>
+        <div id="trabalho" class="panel-collapse collapse ${not empty erroNasJornadas ? 'in' : ''}" role="tabpanel" aria-labelledby="jornadaTrabalho">
+          <div class="panel-body">
+            <div class="form-group col-md-12 col-sm-12">
+<!--        <fieldset class="scheduler-border"> -->
+<!--            <legend class="scheduler-border tituloFieldset">Jornada de Trabalho</legend> -->
+                    <h4>Jornada de Trabalho</h4>
+                    <div style="overflow-x:auto;">
+                        <table id="tabelaAgenda" class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Entrada</th>
+                                    <th>Sa?da</th>
+                                    <th>Dias da Semana</th>
+                                </tr>
+                            </thead>
+            
+                            <tbody>
+                                <c:forEach items="${cadastroProfissionalView.carregaJornadas(profissionalForm)}" var="jornada"
+                            varStatus="status">
+                
+                
+                                    <tr id="linha${status.index}" class="clone" data-index="${status.index}">
+                                        <form:hidden path="jornadasForm[${status.index}].jornada.id" />
+                                        <form:hidden path="jornadasForm[${status.index}].ativa" id="jornadasForm${status.index}-ativa" />
+                                        <td class="form-group col-md-4 col-md-2 col-sm-1" style="min-width: 80px;">
+                                            <form:input path="jornadasForm[${status.index}].jornada.horaInicial" cssClass='form-control hora' cssStyle="vertical-align: middle;"/>
+                                        </td>
+                                        <td class="form-group col-md-4 col-md-2 col-sm-1" style="min-width: 80px;">
+                                            <form:input path="jornadasForm[${status.index}].jornada.horaFinal" cssClass='form-control hora' />
+                                        </td>
+                                        <td colspan="4" class="tabela-baixo tabela-block form-group col-lg-4 col-md-8 col-sm-10">
+                                            <div class="btn-group diasSemana" role="group" aria-label="...">
+                                                <c:forEach items="${dias}" var="dia" varStatus="diaStatus">
+                                                    <button id="dia_${status.index}-${diaStatus.index}-${dia.value}" type="button" class="btn btn-default1 simnaobt">${dia.abreviacao}</button>
+                                                    <form:hidden id="trabalha_${status.index}-${diaStatus.index}-${dia.value}" path="jornadasForm[${status.index}].jornada.dias[${diaStatus.index}].trabalha"/>
+                                                    <form:hidden id="diaSemana_${status.index}-${diaStatus.index}-${dia.value}" path="jornadasForm[${status.index}].jornada.dias[${diaStatus.index}].diaSemana" />
+                                                </c:forEach>
+                                            </div>
+                                        </td>
+                                        <c:if test="${status.index > 0}">
+                                            <td class="form-group col-lg-1 col-md-1 col-sm-1">
+                                                <a class="remove-jornada" data-ativo-id="jornadasForm${status.index}-ativa" data-linha-id="linha${status.index}"> 
+                                                    <span class="glyphicon glyphicon-remove-sign btnRemover" aria-hidden="true"></span>
+                                                </a>
+                                            </td>
+                                        </c:if>
+                                    </tr>
+                                </c:forEach>
+                    
+                            </tbody>
+                        </table>
+                </div>
+                <button class="btn btn-default" type="button" id="adicionarJornada"><span class="glyphicon glyphicon-plus-sign " aria-hidden="true"></span><span class="btnJuntoTitulo"></span>Adicionar Jornada</button>
+                
+                <c:if test="${not empty erroNasJornadas}">
+                    <div class="alert alert-danger" role="alert" id="erroJornadas" style="margin-top: 30px; text-align:center;">
+                        <form:errors path='jornadasForm*' cssStyle="color: #000;" />
+                    </div>
+                </c:if>
+                
+<!--        </fieldset> -->
+    </div>
+    
+    
+    <noscript id="template-linha-jornada">
+    <tr id="linha@index" class="clone" data-index="@index">
+                        <input id="jornadasForm@index.jornada.id" name="jornadasForm[@index].jornada.id" type="hidden">
+                        <input id="jornadasForm@index-ativa" name="jornadasForm[@index].ativa" type="hidden" value="true">
+                        <td class="form-group col-md-4 col-md-2 col-sm-1">
+                            <input id="jornadasForm@index.jornada.horaInicial" name="jornadasForm[@index].jornada.horaInicial" class="form-control hora" style="vertical-align: middle;" type="text" value="08:00">
+                        </td>
+                        <td class="form-group col-md-4 col-md-2 col-sm-1">
+                            <input id="jornadasForm@index.jornada.horaFinal" name="jornadasForm[@index].jornada.horaFinal" class="form-control hora" type="text" value="18:00">
+                        </td>
+                        <td colspan="4" class="tabela-baixo tabela-block form-group col-lg-4 col-md-8 col-sm-10">
+                            <div class="btn-group diasSemana" role="group" aria-label="...">
+                                <c:forEach items="${dias}" var="dia" varStatus="diaStatus">
+                                    <button id="dia_@index-${diaStatus.index}-${dia.value}" type="button" class="btn btn-default1 simnaobt">${dia.abreviacao}</button>
+                                    <input id="trabalha_@index-${diaStatus.index}-${dia.value}" name="jornadasForm[@index].jornada.dias[${diaStatus.index}].trabalha" type="hidden" value="false">
+                                    <input id="diaSemana_@index-${diaStatus.index}-${dia.value}" name="jornadasForm[@index].jornada.dias[${diaStatus.index}].diaSemana" type="hidden" value="${dia.value}">
+                                </c:forEach>
+                            </div>
+                        </td>
+                        <td class="form-group col-lg-1 col-md-1 col-sm-1">
+                            <a class="remove-jornada" data-ativo-id="jornadasForm@index-ativa" data-linha-id="linha@index"> 
+                                <span class="glyphicon glyphicon-remove-sign btnRemover" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
+    </noscript>
+          </div>
+         </div>
+        </div>
+       </div>
+       </div>
+
+
+       <div class="modal fade" id="modalCargos" tabindex="-1" role="dialog"
+       aria-labelledby="modalCargosLabel" aria-hidden="true">
+       <div class="modal-dialog">
+       <form method="POST" id="formCargo">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                   </button>
+                   <h4 class="modal-title">Comanda</h4>
+               </div>
+               <div class="modal-body">
+                   <div class="row">
+                   <div class="col-lg-12">
+                       <div class="form-group col-md-12 col-sm-12">
+                           <div class="form-group col-md-12 col-sm-12">
+                               <label>Cliente</label>                       
+                               <select id="clientesAgendadosNoDia" class="form-control" name="clienteSalao.id">
+                                 <option value="">Selecione o Cliente</option>                                  
+                               </select>                                    
+                           </div>
+                           <div class="form-group col-md-12 col-sm-12" id="tableServicosAgendados" >
+                           </div>                           
+                       </div>
+                   </div>
+               </div>
+               <br style="clear: both;">                            
+               </div>
+               <div class="modal-footer">
+                       <button type="button" class="btn btn-default1" data-dismiss="modal">Cancelar</button>
+                       <button type="button" class="btn btn-primary" id="btnAbrirComanda">Abrir Comanda</button>
+               </div>
+           </div>
+       </form>
+       </div>
+   </div>      
+
+<div class="form-group col-md-12 col-sm-12">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="servicosRealizados">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#realizados" aria-expanded="false" aria-controls="realizados">
+              Servi?os Realizados pelo Profissional
+            </a>
+          </h4>
+        </div>
+        <div id="realizados" class="panel-collapse collapse role="tabpanel" aria-labelledby="servicosRealizados">
+          <div class="panel-body">
+            <div class="form-group col-md-12 col-sm-12">
+                <div style="overflow-x:auto;">
+                    <c:set value="0" var="total"/>
+                    <c:forEach items="${categoriasServico}" var="categoria" varStatus="status">     
+                        <table class="table table-condensed servicoTable" id="T1">
+                            <tbody>
+                                <tr class="headerTBS">
+                                    <th class="form-group col-md-1 col-sm-1">Ativa</th>
+                                    <th class="form-group col-md-3 col-sm-3 tituloTable2">${categoria.nome}</th>
+                                    <th class="form-group col-md-3 col-sm-3" style="min-width: 97px;">Comiss?o</th>
+                                    <th class="form-group col-md-3 col-sm-3" style="min-width: 108px;">Tempo</th>
+                                </tr>
+                                <c:forEach items="${categoria.servicos}" var="servico" varStatus="servicoStatus">
+                                    <form:hidden path="profissional.comissoes[${total}].id"/>                   
+                                    <form:hidden path="profissional.comissoes[${total}].servico.id" value="${servico.id}"/>
+                                    <tr>
+                                        <td><form:checkbox path="profissional.comissoes[${total}].ativa" value="true"/></td>
+                                        <td>${servico.nome}</td>
+                                        <td>
+                                            <div class="input-prepend input-append">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <form:input path="profissional.comissoes[${total}].valor" cssClass="form-control"/>
+                                                        <div class="input-group-addon">%</div>
+                                                    </div>
+                                                  </div>
+                                                <span class="add-on servComissaoPercente"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="input-prepend input-append">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <form:input path="profissional.comissoes[${total}].tempo" cssClass="form-control"/>
+                                                        <div class="input-group-addon">min</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <c:set value="${total + 1}" var="total"/>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:forEach>
+<!--                    <div class="sessaoBotoes"> -->
+<%--                        <a href="${pageContext.request.contextPath}/servico/form" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-plus-sign"></span> Ad. Serv.</a> --%>
+<!--                    </div> -->
+                </div>
+            </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       </div>
+
+
+
+
+
+<script>
+
+    <c:if test="${not empty erroNasJornadas}">
+        $('html, body').animate({
+            scrollTop: $("#erroJornadas").offset().top
+        }, 2000);   
+    </c:if>
+        
+    
+
+    function chamaModal(){
+        $("#btnAbrirComanda").prop("disabled",false);       
+        $("#abrirModal").attr("href","#modalComanda");
+        $('#abrirModal').on( "click", function( event ) {
+            event.preventDefault();
+        });
+    }
+
+    $("#btnAbrirComanda").on('click',function(){
+        if($("#numero").val() != ""){
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/ajax/agendamento/check/comanda/aberta/mesmo/numero",
+                data:{ data: $("#dataAbertura").val() , idTenant : $("#idTenant").val(), numero : $("#numero").val().trim()},
+                success: function(data){
+                    if(!data){
+                        $("#formCargo").attr("action", "${pageContext.request.contextPath}/comanda");
+                        $("#formCargo").submit();
+                    }else{
+                        $("#messageError").html(messageError("J? existe uma comanda com o mesmo n?mero aberta ou pendurada!"));
+                    }
+                }
+            });
+        }else{
+            $("#messageError").html(messageError("Voc? precisa informar um n?mero de Comanda !"));
+        }
+    });   
+
+    
+    $("#tabelaAgenda tbody").on("click",".diasSemana > button",function(){
+        var sufixoId = $(this).attr('id').split("_")[1];
+        var diaSemana = $(this).attr('id').split("-")[2];
+        $("#diaSemana_"+sufixoId).val(diaSemana);
+        if($(this).hasClass("ativo")){
+            $(this).removeClass("ativo");
+            $("#trabalha_"+sufixoId).val(false)
+        }else{
+            $(this).addClass("ativo");
+            $("#trabalha_"+sufixoId).val(true)
+        }
+    });
+    
+    
+    
+    if($("#possuiAgenda").val() == "true"){
+        $("#sim").addClass("ativo");
+        $("#nao").removeClass("ativo");
+    }else{
+        $("#nao").addClass("ativo");
+        $("#sim").removeClass("ativo");
+    }
+    
+    $("#sim").click(function() {
+        $("#sim").addClass("ativo");
+        $("#nao").removeClass("ativo");
+        $("#possuiAgenda").val(true);
+    });
+    
+    $("#nao").click(function() {
+        $("#nao").addClass("ativo");
+        $("#sim").removeClass("ativo");
+        $("#possuiAgenda").val(false);
+    });
+</script>   
+
+
+
+LinkedBy 	
+Diego Delmiro
+Desenvolvimento
+diego.delmiro@controlinformatica.com.br | www.linkedby.com.br
+Regionais: (RS) 51-3062-5110 (MG) 31-3274-1587 (BA) 71-3036-8600
+Esta mensagem pode conter informações confidenciais ou privilegiadas. Se você recebeu por engano, você não deve usar, copiar divulgar ou tomar qualquer atitude com base nessas informações. Solicitamos que você apague a mensagem e avise imediatamente em resposta ao e-mail de origem. Opiniões, conclusões ou informações dessa mensagem não necessariamente refletem a posição oficial da empresa.
